@@ -13,6 +13,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -20,14 +31,6 @@ a {
 }
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -65,4 +68,106 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.navigation {
+  background-color: cornflowerblue;
+  padding: 1.5rem;
+}
+
+.navigation ul {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 60rem;
+  margin: auto;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.navigation ul li {
+}
+
+.navigation ul li a {
+  text-decoration: none;
+  color: azure;
+  font-size: 1.5rem;
+}
+
+main {
+  max-width: 60rem;
+  margin: auto;
+  padding: 0 2rem;
+}
+
+.single-post h2 {
+  font-size: 1.7rem;
+  text-transform: uppercase;
+}
+
+.single-post p {
+  font-size: 1.2rem;
+}
+
+.post-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.post-list li {
+  border-top: 1px solid black;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.post-list li a {
+  text-decoration: none;
+}
+
+.post-list li h2 {
+  text-transform: uppercase;
+}
+
+form {
+  max-width: 60rem;
+  padding: 0 10px;
+  margin: 1rem auto;
+}
+
+.form-control {
+  margin-bottom: 2rem;
+}
+
+.form-control label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+}
+
+.form-control input,
+.form-control textarea {
+  width: 100%;
+}
+
+.form-control input {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #000;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control textarea {
+  resize: none;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
 }
