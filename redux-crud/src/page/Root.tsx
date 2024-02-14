@@ -1,13 +1,11 @@
 import { Outlet } from 'react-router-dom';
-import Navigation from '../../components/Navigation';
-
-import './root.css';
+import Navigation from '../components/Navigation';
 
 const Root = () => {
   return (
-    <div>
+    <div className="container">
       <Navigation />
-      <main className="container">
+      <main>
         <Outlet />
       </main>
     </div>

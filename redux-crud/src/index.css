@@ -8,3 +8,21 @@
     font-family: 'Roboto', sans-serif;
   }
 }
+
+@layer components {
+  .header {
+    nav {
+      ul {
+        @apply flex justify-between items-center list-none gap-2;
+        li {
+          a.active {
+            @apply text-blue-800 font-extrabold;
+          }
+        }
+      }
+    }
+  }
+  .container {
+    @apply max-w-6xl mx-auto bg-orange-600;
+  }
+}
