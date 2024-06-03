@@ -10,7 +10,7 @@ broker.createService({
       // Simulated email logic
       console.log(`Sending email to ${recipient} with ${subject}`);
       console.log(`Content: ${content}`);
-      return `Email sent to ${recepient}`;
+      return `Email sent to ${recipient}`;
     },
   },
 });
