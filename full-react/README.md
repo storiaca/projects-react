@@ -7,3 +7,7 @@
 ## Code
 
 <https://github.com/SuperSimpleDev/react-course/tree/main>
+
+## Link for chatbot
+
+<https://supersimple.dev/projects/chatbot/>

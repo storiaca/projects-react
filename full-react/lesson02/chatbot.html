@@ -14,25 +14,30 @@
       function ChatInput() {
         return (
           <>
-            <input />
+            <input placeholder="Send a message to Chatbot" size="30" />
             <button>Send</button>
           </>
         );
       }
 
-      const button = <button>hello</button>;
-      const paragraph = <p>paragraph of text</p>;
+      function ChatMessage({ message }) {
+        return (
+          <div>
+            {message}
+            <img src="user.png" width="50" />
+          </div>
+        );
+      }
 
-      const div = (
-        <div>
-          <button>hello</button>
-          <p>paragraph of text {2 + 2}</p>
-          {ChatInput()}
-        </div>
+      const app = (
+        <>
+          <ChatInput />
+          <ChatMessage message="hello chatbot" />
+        </>
       );
 
       const container = document.querySelector(".js-container");
-      ReactDOM.createRoot(container).render(div);
+      ReactDOM.createRoot(container).render(app);
     </script>
   </body>
 </html>
