@@ -4,6 +4,10 @@
 
 <https://www.youtube.com/watch?v=upo7BBbomoQ&t=20s>
 
+## Postgresql neon link
+
+<https://neon.com/postgresql/tutorial>
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
