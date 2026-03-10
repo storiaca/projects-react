@@ -4,6 +4,10 @@
 
 <https://www.youtube.com/watch?v=upo7BBbomoQ&t=20s>
 
+## Code
+
+<https://github.com/machadop1407/pern-fullstack-course>
+
 ## Postgresql neon link
 
 <https://neon.com/postgresql/tutorial>
