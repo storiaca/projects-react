@@ -1,9 +1,9 @@
-import React from 'react'
+import { AuthView } from '@neondatabase/neon-js/auth/react'
 
 const Auth = () => {
   return (
     <div>
-      <h1>Auth</h1>
+      <AuthView />
     </div>
   )
 }
