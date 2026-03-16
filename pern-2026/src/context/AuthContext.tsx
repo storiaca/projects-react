@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-const AuthContext = createContext()
+const AuthContext = createContext<AuthContextType | null>(null)
