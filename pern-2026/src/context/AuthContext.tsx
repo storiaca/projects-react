@@ -1,39 +1,49 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import type {User} from "../types"
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
+import type { User } from "../types";
 import { authClient } from "../lib/auth";
 
 interface AuthContextType {
-  user: User | null
+  user: User | null;
 }
 
-const AuthContext = createContext<AuthContextType | null>(null)
+const AuthContext = createContext<AuthContextType | null>(null);
 
-export default function AuthProvider({children}: {children: ReactNode}) {
-  const [neonUser, setNeonUser] = useState<any>(null)
+export default function AuthProvider({ children }: { children: ReactNode }) {
+  const [neonUser, setNeonUser] = useState<any>(null);
 
   useEffect(() => {
     async function loadUser() {
       try {
-        const result = await authClient.getSession()
-        if(result && result.data?.user) {
-          setNeonUser(result.data.user)
+        const result = await authClient.getSession();
+        if (result && result.data?.user) {
+          setNeonUser(result.data.user);
         } else {
-          setNeonUser(null)
+          setNeonUser(null);
         }
       } catch (error) {
-        setNeonUser(null)
+        setNeonUser(null);
       }
     }
 
-    loadUser()
-  }, [])
-  return <AuthContext.Provider value={{user: neonUser}}>{children}</AuthContext.Provider>
+    loadUser();
+  }, []);
+  return (
+    <AuthContext.Provider value={{ user: neonUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth() {
   const context = useContext(AuthContext);
-  if(!context) {
-    throw new Error('useAuth must be used within an AuthProvider')
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
   }
 
   return context;
