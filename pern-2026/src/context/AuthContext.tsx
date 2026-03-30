@@ -10,14 +10,16 @@ import { authClient } from "../lib/auth";
 
 interface AuthContextType {
   user: User | null;
+  isLoading: boolean
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [neonUser, setNeonUser] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  useEffect(() => { 
     async function loadUser() {
       try {
         const result = await authClient.getSession();
@@ -25,16 +27,18 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
           setNeonUser(result.data.user);
         } else {
           setNeonUser(null);
-        }
+        } 
       } catch (error) {
         setNeonUser(null);
+      } finally {
+        setIsLoading(false)
       }
     }
 
     loadUser();
   }, []);
   return (
-    <AuthContext.Provider value={{ user: neonUser }}>
+    <AuthContext.Provider value={{ user: neonUser, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
