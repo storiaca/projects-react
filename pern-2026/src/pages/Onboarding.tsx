@@ -57,6 +57,7 @@ const Onboarding = () => {
           {/* Progrrss Indicator */}
 
           {/* Step 1: Questionare */}
+          
           {/* Step 2: Generating */}
         </div>
       </div>
