@@ -18,7 +18,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         {label && (
           <label
             htmlFor={id}
-            className="text-sm font-medium text-[var(--color-foreground)]"
+            className="text-sm font-medium text-foreground"
           >
             {label}
           </label>
