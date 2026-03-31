@@ -1,6 +1,8 @@
-import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { RedirectToSignIn, SignedIn } from "@neondatabase/neon-js/auth/react";
+import { Card } from "../components/ui/Card";
+import { Select } from "../components/ui/Select";
+import { useState } from "react";
 
 const goalOptions = [
   { value: "bulk", label: "Build Muscle (Bulk)" },
@@ -46,9 +48,25 @@ const splitOptions = [
 
 const Onboarding = () => {
   const { user } = useAuth();
+  const [formData, setFormData] = useState({
+    goal: "bulk",
+    experience: "intermediate",
+    daysPerWeek: "4",
+    sessionLength: "60",
+    equipment: "full_gym",
+    injuries: "",
+    preferredSplit: "upper_lower",
+  });
+
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [error, setError] = useState("");
+
+  function updateForm(field: string, value: string) {
+    setFormData((prev) => ({ ...prev, [field]: value}))
+  }
 
   if (!user) {
-    return <RedirectToSignIn />
+    return <RedirectToSignIn />;
   }
   return (
     <SignedIn>
@@ -57,7 +75,29 @@ const Onboarding = () => {
           {/* Progrrss Indicator */}
 
           {/* Step 1: Questionare */}
-          
+          <Card variant="bordered">
+            <h1 className="text-2xl font-bold mb-2">Tell Us About Yourself</h1>
+            <p className="text-muted mb-6">
+              Help us create the perfect plan for you.
+            </p>
+            <form>
+              <Select
+                id="goal"
+                label="What's your primary goal?"
+                options={goalOptions}
+                value={formData.goal}
+                onChange={(e) => updateForm('goal', e.target.value)}
+              />
+              <Select
+                id="experience"
+                label="Training experience"
+                options={experienceOptions}
+                value={formData.experience}
+                onChange={(e) => updateForm('experience', e.target.value)}
+              />
+            </form>
+          </Card>
+
           {/* Step 2: Generating */}
         </div>
       </div>
