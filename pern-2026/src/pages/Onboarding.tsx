@@ -62,7 +62,7 @@ const Onboarding = () => {
   const [error, setError] = useState("");
 
   function updateForm(field: string, value: string) {
-    setFormData((prev) => ({ ...prev, [field]: value}))
+    setFormData((prev) => ({ ...prev, [field]: value }));
   }
 
   if (!user) {
@@ -80,21 +80,37 @@ const Onboarding = () => {
             <p className="text-muted mb-6">
               Help us create the perfect plan for you.
             </p>
-            <form>
+            <form className="space-y-5">
               <Select
                 id="goal"
                 label="What's your primary goal?"
                 options={goalOptions}
                 value={formData.goal}
-                onChange={(e) => updateForm('goal', e.target.value)}
+                onChange={(e) => updateForm("goal", e.target.value)}
               />
               <Select
                 id="experience"
                 label="Training experience"
                 options={experienceOptions}
                 value={formData.experience}
-                onChange={(e) => updateForm('experience', e.target.value)}
+                onChange={(e) => updateForm("experience", e.target.value)}
               />
+              <div className="grid grid-cols-2 gap-4">
+                <Select
+                  id="daysPerWeek"
+                  label="Days per week"
+                  options={daysOptions}
+                  value={formData.daysPerWeek}
+                  onChange={(e) => updateForm("daysPerWeek", e.target.value)}
+                />
+                <Select
+                  id="sessionLength"
+                  label="Session length"
+                  options={sessionOptions}
+                  value={formData.sessionLength}
+                  onChange={(e) => updateForm("sessionLength", e.target.value)}
+                />
+              </div>
             </form>
           </Card>
 
