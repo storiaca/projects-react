@@ -3,6 +3,7 @@ import { RedirectToSignIn, SignedIn } from "@neondatabase/neon-js/auth/react";
 import { Card } from "../components/ui/Card";
 import { Select } from "../components/ui/Select";
 import { useState } from "react";
+import { Textarea } from "../components/ui/Textarea";
 
 const goalOptions = [
   { value: "bulk", label: "Build Muscle (Bulk)" },
@@ -68,6 +69,7 @@ const Onboarding = () => {
   if (!user) {
     return <RedirectToSignIn />;
   }
+
   return (
     <SignedIn>
       <div className="min-h-screen pt-24 pb-12 px-6">
@@ -111,6 +113,28 @@ const Onboarding = () => {
                   onChange={(e) => updateForm("sessionLength", e.target.value)}
                 />
               </div>
+              <Select
+                id="equipment"
+                label="Equipment access"
+                options={equipmentOptions}
+                value={formData.equipment}
+                onChange={(e) => updateForm("equipment", e.target.value)}
+              />
+              <Select
+                id="preferredSplit"
+                label="Preferred training split"
+                options={splitOptions}
+                value={formData.preferredSplit}
+                onChange={(e) => updateForm("preferredSplit", e.target.value)}
+              />
+              <Textarea
+                id="injuries"
+                label="Any injuries or limitations? (optional)"
+                placeholder="E.g., lower back issues, shoulder impingement..."
+                rows={3}
+                value={formData.injuries}
+                onChange={(e) => updateForm("injuries", e.target.value)}
+              />
             </form>
           </Card>
 
