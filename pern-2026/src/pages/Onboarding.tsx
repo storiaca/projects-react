@@ -68,8 +68,8 @@ const Onboarding = () => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   }
 
-  function handleQuestionnaire() {
-
+  function handleQuestionnaire(e:React.SubmitEvent) {
+    e.preventDefault()
   }
 
   if (!user) {
