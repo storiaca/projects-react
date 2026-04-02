@@ -4,6 +4,8 @@ import { Card } from "../components/ui/Card";
 import { Select } from "../components/ui/Select";
 import { useState } from "react";
 import { Textarea } from "../components/ui/Textarea";
+import { Button } from "../components/ui/Button";
+import { ArrowRight } from "lucide-react";
 
 const goalOptions = [
   { value: "bulk", label: "Build Muscle (Bulk)" },
@@ -66,6 +68,10 @@ const Onboarding = () => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   }
 
+  function handleQuestionnaire() {
+
+  }
+
   if (!user) {
     return <RedirectToSignIn />;
   }
@@ -82,7 +88,7 @@ const Onboarding = () => {
             <p className="text-muted mb-6">
               Help us create the perfect plan for you.
             </p>
-            <form className="space-y-5">
+            <form onSubmit={handleQuestionnaire} className="space-y-5">
               <Select
                 id="goal"
                 label="What's your primary goal?"
@@ -135,6 +141,11 @@ const Onboarding = () => {
                 value={formData.injuries}
                 onChange={(e) => updateForm("injuries", e.target.value)}
               />
+              <div className="flex gap-3 pt-2">
+                <Button type="submit" className="flex-1 gap-2">
+                  Generate My Plan <ArrowRight className="w-4 h-4"/>
+                </Button>
+              </div>
             </form>
           </Card>
 
