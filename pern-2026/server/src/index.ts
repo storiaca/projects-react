@@ -12,8 +12,8 @@ app.use(cookieParser())
 app.use(express.json())
 
 // API Routes
-app.use("/plan", planRouter);
-app.use("/profile", profileRouter)
+app.use("/api/plan", planRouter);
+app.use("/api/profile", profileRouter)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`)
