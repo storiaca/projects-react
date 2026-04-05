@@ -11,8 +11,10 @@ import { api } from "../lib/api";
 
 interface AuthContextType {
   user: User | null;
-  isLoading: boolean, 
-  saveProfile: (profile: Omit<UserProfile, 'userId' | 'updatedAt'>) => Promise<void>
+  isLoading: boolean;
+  saveProfile: (
+    profile: Omit<UserProfile, "userId" | "updatedAt">,
+  ) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -20,8 +22,8 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [neonUser, setNeonUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => { 
+  
+  useEffect(() => {
     async function loadUser() {
       try {
         const result = await authClient.getSession();
@@ -29,23 +31,26 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
           setNeonUser(result.data.user);
         } else {
           setNeonUser(null);
-        } 
+        }
       } catch (error) {
         setNeonUser(null);
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     }
 
     loadUser();
   }, []);
 
-  async function saveProfile(profileData: Omit<UserProfile, 'userId' | 'updatedAt'>) {
-    if(!neonUser) {
-      throw new Error("User must be authenticated to save profile")
+  async function saveProfile(
+    profileData: Omit<UserProfile, "userId" | "updatedAt">,
+  ) {
+    if (!neonUser) {
+      throw new Error("User must be authenticated to save profile");
     }
 
-    await api.saveProfile(neonUser.id, profileData)
+    await api.saveProfile(neonUser.id, profileData);
+    
   }
   return (
     <AuthContext.Provider value={{ user: neonUser, isLoading, saveProfile }}>
