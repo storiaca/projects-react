@@ -20,4 +20,6 @@ export async function generateTrainingPlan(
   if(!apiKey) {
     throw new Error("OPEN_ROUTER_KEY is not set in enviroment variables")
   }
+
+  
 }
