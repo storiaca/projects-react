@@ -32,6 +32,48 @@ export async function generateTrainingPlan(
 
   // Build the prompt
   const prompt = buildPrompt(normalizedProfile);
+
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "nvidia/llama-nemotron-embed-vl-1b-v2:free",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are an expert fitness trainer and program designer. You must respond with valid JSON only. Do not include any markdown, reasoning, or additional text.",
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      temperature: 0.7,
+      response_format: { type: "json_object" },
+    });
+
+    const content = completion.choices[0].message.content;
+
+    if (!content) {
+      console.error(
+        "[AI] No content in response:",
+        JSON.stringify(completion, null, 2),
+      );
+      throw new Error("No content in AI response");
+    }
+
+    const planData = JSON.parse(content);
+
+    return formatPlanResponse(planData, normalizedProfile);
+
+  } catch (error) {
+    console.error("[AI] Error generating training plan:", error);
+    throw error;
+  }
+}
+
+function formatPlanResponse(aiResponse: any,
+  profile: UserProfile,) {
+
 }
 
 function buildPrompt(userProfile: UserProfile): string {
@@ -63,6 +105,7 @@ function buildPrompt(userProfile: UserProfile): string {
   };
 
   return `Create a personalized ${userProfile.days_per_week}-day per week training plan for someone with the following profile:
+
   Goal: ${goalMap[userProfile.goal] || userProfile.goal}
   Experience Level: ${experienceMap[userProfile.experience] || userProfile.experience}
   Session Length: ${userProfile.session_length} minutes per session
