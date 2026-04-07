@@ -72,8 +72,36 @@ export async function generateTrainingPlan(
 }
 
 function formatPlanResponse(aiResponse: any,
-  profile: UserProfile,) {
-
+  profile: UserProfile): Omit<TrainingPlan, "id" | "userId" | "version" | "createdAt"> {
+     const plan: Omit<TrainingPlan, "id" | "userId" | "version" | "createdAt"> = {
+    overview: {
+      goal: aiResponse.overview?.goal || `Customized ${profile.goal} program`,
+      frequency:
+        aiResponse.overview?.frequency ||
+        `${profile.days_per_week} days per week`,
+      split: aiResponse.overview?.split || profile.preferred_split,
+      notes:
+        aiResponse.overview?.notes ||
+        "Follow the program consistently for best results.",
+    },
+    weeklySchedule: (aiResponse.weeklySchedule || []).map((day: any) => ({
+      day: day.day || "Day",
+      focus: day.focus || "Full Body",
+      exercises: (day.exercises || []).map((ex: any) => ({
+        name: ex.name || "Exercise",
+        sets: ex.sets || 3,
+        reps: ex.reps || "8-12",
+        rest: ex.rest || "60-90 sec",
+        rpe: ex.rpe || 7,
+        notes: ex.notes,
+        alternatives: ex.alternatives,
+      })),
+    })),
+    progression:
+      aiResponse.progression ||
+      "Increase weight by 2.5-5lbs when you can complete all sets with good form. Track your progress weekly.",
+  };
+  return plan;
 }
 
 function buildPrompt(userProfile: UserProfile): string {
