@@ -26,4 +26,9 @@ export const api = {
   ) => {
     post("/profile", { userId, ...profile });
   },
+  generatePlan: (
+    userId: string,
+  ) => {
+    post("/plan/generate", { userId });
+  },
 };
