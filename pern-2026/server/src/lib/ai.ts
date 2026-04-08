@@ -3,7 +3,7 @@ import { TrainingPlan, UserProfile } from "../../types";
 
 export async function generateTrainingPlan(
   profile: UserProfile | Record<string, any>,
-): Promise<TrainingPlan> {
+): Promise<Omit<TrainingPlan, "id" | "userId" | "version" | "createdAt">> {
   // Normalize profile data
   const normalizedProfile: UserProfile = {
     goal: profile.goal || "bulk",
@@ -73,7 +73,7 @@ export async function generateTrainingPlan(
 
 function formatPlanResponse(aiResponse: any,
   profile: UserProfile): Omit<TrainingPlan, "id" | "userId" | "version" | "createdAt"> {
-     const plan: Omit<TrainingPlan, "id" | "userId" | "version" | "createdAt"> = {
+    const plan: Omit<TrainingPlan, "id" | "userId" | "version" | "createdAt"> = {
     overview: {
       goal: aiResponse.overview?.goal || `Customized ${profile.goal} program`,
       frequency:
